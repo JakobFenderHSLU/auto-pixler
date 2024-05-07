@@ -20,7 +20,7 @@ with st.sidebar:
     dither_n = st.slider('Dithering Matrix Size', min_value=2, max_value=8, value=4, step=1)
     n_colors = st.number_input('Number of colors', min_value=2, max_value=256, value=4, step=1)
     downscale = st.slider('Downscale', min_value=1, max_value=10, value=1, step=1)
-    density = st.slider('Density', min_value=1, max_value=100, value=20, step=1)
+    density = st.slider('Density', min_value=1, max_value=100, value=10, step=1)
 
 if image:
     col = st.columns(2)
@@ -56,44 +56,30 @@ if image:
 
             def generate_pixel_art(img: np.array, dither_m: np.array, n_colors: int, downscale: int = 1,
                                    temperature: float = 20):
-                img = img.copy()
                 img = cv2.resize(img, (img.shape[1] // downscale, img.shape[0] // downscale))
                 q_img, palette = quantize_color_image_unique(img, n_colors)
-                sorted_palette = sorted(palette.tolist())
-                sorted_palette.reverse()
-                d_img = np.ones_like(img).astype('int')
+                sorted_palette = sorted(palette.tolist(), reverse=True)
+                d_img = np.full_like(img, sorted_palette[0], dtype=int)
+                n = dither_m.shape[0]
 
-                d_img *= sorted_palette[0]
+                # Create index grids
+                x_idx, y_idx = np.meshgrid(np.arange(img.shape[1]), np.arange(img.shape[0]))
+                dither_idx = dither_m[x_idx % n, y_idx % n]
 
                 for i in range(len(sorted_palette) - 1):
-                    sub_img = np.zeros_like(img)
                     current_color = sorted_palette[i]
                     next_color = sorted_palette[i + 1]
-
-                    n = np.size(dither_m, axis=0)
-                    for x in range(img.shape[1]):
-                        for y in range(img.shape[0]):
-                            i = x % n
-                            j = y % n
-
-                            distance_current_color = math.sqrt(sum(img[y][x] - current_color) ** 2)
-                            distance_next_color = math.sqrt(sum(img[y][x] - next_color) ** 2)
-                            rel_dist_next_color = distance_current_color / (
-                                    distance_current_color + distance_next_color)
-                            sigmoided = 1 / (1 + math.exp(-(rel_dist_next_color - 0.5) * temperature))
-
-                            if sigmoided > dither_m[i][j]:
-                                sub_img[y][x] = 255
-                            else:
-                                sub_img[y][x] = 0
-                    # where one multiply with next color and overlay over d_img
-                    d_img = np.where(sub_img == 255, next_color, d_img)
+                    diff = img - current_color
+                    distances = np.linalg.norm(diff, axis=-1)
+                    rel_distances = distances / (distances + np.linalg.norm(img - next_color, axis=-1))
+                    sigmoided = 1 / (1 + np.exp(-(rel_distances - 0.5) * temperature))
+                    dithered = sigmoided > dither_idx
+                    d_img[dithered] = next_color
 
                 return d_img
 
 
             dither_n = 2 ** dither_n
-            downscale = 2 ** downscale
 
             img = cv2.imdecode(np.frombuffer(image.read(), np.uint8), cv2.IMREAD_COLOR)
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
