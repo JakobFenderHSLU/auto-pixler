@@ -1,5 +1,9 @@
 .venv
 .idea
 
-img/example
+img/example/
+!img/example/.gitkeep
+
 output/
+!output/.gitkeep
+
