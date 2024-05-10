@@ -11,12 +11,12 @@ The app allows you to perform color quantization and dithering on an image of yo
 st.write("---")
 
 st.write("### Color Quantization")
-st.write("- [Color Quantization](/1_Color_Quantisation.py)")
-st.write("- [Color Quantization with a Specific Palette](/2_Color_Quantisation_Specific_Palette.py)")
+st.write("- [Color Quantization](/1_Color_Quantisation)")
+st.write("- [Color Quantization with a Specific Palette](/2_Color_Quantisation_Specific_Palette)")
 
 st.write("### Dithering")
-st.write("- [Dithering](/3_Dithering.py)")
-st.write("- [Dithering with a Specific Palette](/4_Dithering_Specific_Palette.py)")
+st.write("- [Dithering](/3_Dithering)")
+st.write("- [Dithering with a Specific Palette](/4_Dithering_Specific_Palette)")
 
 
 
