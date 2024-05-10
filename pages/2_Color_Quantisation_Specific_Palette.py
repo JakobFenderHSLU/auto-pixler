@@ -5,9 +5,12 @@ from sklearn.cluster import KMeans
 
 st.set_page_config(page_title='Color Quantisation', layout='wide')
 
-st.title('Color Quantisation')
-st.write('Here you can reduce the number of colors in an image.')
+st.title('Color Quantisation with a Specific Palette')
+st.write('Here you can reduce the number of colors in an image. The color here is first grouped by the KMeans '
+         'algorithm. After that, the color is quantized to the nearest color in the palette.')
 
+st.write("Wiki: [Color Quantisation](https://en.wikipedia.org/wiki/Color_quantization), "
+         "[KMenas](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)")
 st.write("---")
 
 with st.sidebar:
@@ -40,6 +43,7 @@ if image:
             img = cv2.imdecode(np.frombuffer(image.read(), np.uint8), cv2.IMREAD_COLOR)
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
+
             def quantize_color_image_black_and_white(img, n_colors=4):
                 img = img.copy()
                 kmeans = KMeans(n_clusters=n_colors)
@@ -48,6 +52,7 @@ if image:
 
                 ret_img = palette[kmeans.labels_].reshape(img.shape).astype(np.uint8)
                 return ret_img, palette
+
 
             if black_and_white:
                 img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)

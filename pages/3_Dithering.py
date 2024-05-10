@@ -6,7 +6,13 @@ from sklearn.cluster import KMeans
 st.set_page_config(page_title='Dithering', layout='wide')
 
 st.title('Dithering')
-st.write('Here you can reduce the number of colors in an image.')
+st.write('Smiliar to color quantisation, dithering reduces the number of colors in an image. First the color is  '
+         'quantized per channel. So either fully red, green, or blue. Then the color is dithered. This method adds '
+         'pixel to the image to make it look like it has more colors than it actually has.')
+
+
+st.write("Wiki: [Color Quantisation](https://en.wikipedia.org/wiki/Color_quantization), "
+         "[Dithering](https://en.wikipedia.org/wiki/Dither)")
 
 st.write("---")
 

@@ -5,7 +5,10 @@ import cv2
 st.set_page_config(page_title='Color Quantisation', layout='wide')
 
 st.title('Color Quantisation')
-st.write('Here you can reduce the number of colors in an image.')
+st.write('Here you can reduce the number of colors in an image. Here the color is quantized per channel. '
+         'So either fully red, green, or blue.')
+
+st.write("Wiki: [Color Quantisation](https://en.wikipedia.org/wiki/Color_quantization)")
 
 st.write("---")
 
@@ -48,6 +51,7 @@ if image:
                     ret_img[np.all(img >= palette[i], axis=-1)] = palette[i]
                 return ret_img
 
+
             img = cv2.imdecode(np.frombuffer(image.read(), np.uint8), cv2.IMREAD_COLOR)
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
@@ -58,5 +62,3 @@ if image:
                 img = quantize_color_image(img, colors)
 
             st.image(img, use_column_width=True)
-
-
