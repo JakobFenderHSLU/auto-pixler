@@ -9,7 +9,7 @@ st.title('Color Quantisation with a Specific Palette')
 st.write('Here you can reduce the number of colors in an image. The color here is first grouped by the KMeans '
          'algorithm. After that, the color is quantized to the nearest color in the palette.')
 
-st.write("Wiki: [Color Quantisation](https://en.wikipedia.org/wiki/Color_quantization), "
+st.write("Further Information: [Color Quantisation](https://en.wikipedia.org/wiki/Color_quantization), "
          "[KMenas](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)")
 st.write("---")
 

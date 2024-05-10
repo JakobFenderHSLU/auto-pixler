@@ -8,7 +8,7 @@ st.title('Color Quantisation')
 st.write('Here you can reduce the number of colors in an image. Here the color is quantized per channel. '
          'So either fully red, green, or blue.')
 
-st.write("Wiki: [Color Quantisation](https://en.wikipedia.org/wiki/Color_quantization)")
+st.write("Further Information: [Color Quantisation](https://en.wikipedia.org/wiki/Color_quantization)")
 
 st.write("---")
 

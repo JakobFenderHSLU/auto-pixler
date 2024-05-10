@@ -12,7 +12,7 @@ st.write('Smiliar to color quantisation, dithering reduces the number of colors 
          'First a color palette is created by clustering the colors in the image. Then the color is dithered. '
          'This method adds pixels to the image to make it look like it has more colors than it actually has.')
 
-st.write("[Color Quantisation](https://en.wikipedia.org/wiki/Color_quantization), "
+st.write("Further Information: [Color Quantisation](https://en.wikipedia.org/wiki/Color_quantization), "
          "[KMenas](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)"
          "[Dithering](https://en.wikipedia.org/wiki/Dither), ")
 

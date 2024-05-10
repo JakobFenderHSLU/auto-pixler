@@ -11,7 +11,7 @@ st.write('Smiliar to color quantisation, dithering reduces the number of colors 
          'pixel to the image to make it look like it has more colors than it actually has.')
 
 
-st.write("Wiki: [Color Quantisation](https://en.wikipedia.org/wiki/Color_quantization), "
+st.write("Further Information: [Color Quantisation](https://en.wikipedia.org/wiki/Color_quantization), "
          "[Dithering](https://en.wikipedia.org/wiki/Dither)")
 
 st.write("---")
