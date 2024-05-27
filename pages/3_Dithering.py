@@ -1,7 +1,6 @@
-import streamlit as st
-import numpy as np
 import cv2
-from sklearn.cluster import KMeans
+import numpy as np
+import streamlit as st
 
 st.set_page_config(page_title='Dithering', layout='wide')
 
@@ -9,7 +8,6 @@ st.title('Dithering')
 st.write('Smiliar to color quantisation, dithering reduces the number of colors in an image. First the color is  '
          'quantized per channel. So either fully red, green, or blue. Then the color is dithered. This method adds '
          'pixel to the image to make it look like it has more colors than it actually has.')
-
 
 st.write("Further Information: [Color Quantisation](https://en.wikipedia.org/wiki/Color_quantization), "
          "[Dithering](https://en.wikipedia.org/wiki/Dither)")
@@ -22,6 +20,8 @@ with st.sidebar:
     image = st.file_uploader('Upload an image', type=['png', 'jpg', 'jpeg'], key='image')
 
     dither_n = st.number_input('Dithering Matrix Size', min_value=2, max_value=8, value=4, step=1)
+    downscale = st.slider('Downscale', min_value=1, max_value=10, value=1, step=1)
+
     black_and_white = st.checkbox('Black and white', value=False)
 
 if image:
@@ -65,6 +65,9 @@ if image:
 
             img = cv2.imdecode(np.frombuffer(image.read(), np.uint8), cv2.IMREAD_COLOR)
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+            downscale = 2 ** downscale
+            img = cv2.resize(img, (img.shape[1] // downscale, img.shape[0] // downscale))
 
             if black_and_white:
                 img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
