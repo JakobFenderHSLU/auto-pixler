@@ -61,4 +61,4 @@ if image:
             else:
                 img = quantize_color_image(img, colors)
 
-            st.image(img, use_column_width=True)
+            st.image(img, use_column_width=True, output_format="PNG")

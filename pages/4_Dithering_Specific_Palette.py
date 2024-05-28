@@ -93,4 +93,4 @@ if image:
             print(img.shape)
             print(dither_n, n_colors, downscale, density)
             img = generate_pixel_art(img, dither_matrix(dither_n), n_colors, downscale, density)
-            st.image(img, use_column_width=True)
+            st.image(img, use_column_width=True, output_format="PNG")

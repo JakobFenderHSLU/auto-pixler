@@ -60,4 +60,4 @@ if image:
             else:
                 img, color_palette_unique = quantize_color_image_unique(img, colors)
 
-            st.image(img, use_column_width=True)
+            st.image(img, use_column_width=True, output_format="PNG")

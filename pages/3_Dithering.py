@@ -1,3 +1,6 @@
+import base64
+from io import BytesIO
+
 import cv2
 import numpy as np
 import streamlit as st
@@ -77,4 +80,4 @@ if image:
                 for i in range(3):
                     img[:, :, i] = ordered_dithering(img[:, :, i], dither_matrix(dither_n))
 
-            st.image(img, use_column_width=True)
+            st.image(img, use_column_width=True, output_format="PNG")
