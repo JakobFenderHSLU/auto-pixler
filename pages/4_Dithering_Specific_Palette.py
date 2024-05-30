@@ -55,15 +55,13 @@ if image:
                 kmeans = KMeans(n_clusters=n_colors)
                 kmeans.fit(img.reshape(-1, 3))
                 palette = kmeans.cluster_centers_.astype(np.uint8)
-
-                ret_img = palette[kmeans.labels_].reshape(img.shape).astype(np.uint8)
-                return ret_img, palette
+                return palette
 
 
             def generate_pixel_art(img: np.array, dither_m: np.array, n_colors: int, downscale: int = 1,
                                    temperature: float = 20):
                 img = cv2.resize(img, (img.shape[1] // downscale, img.shape[0] // downscale))
-                q_img, palette = quantize_color_image_unique(img, n_colors)
+                palette = quantize_color_image_unique(img, n_colors)
                 sorted_palette = sorted(palette.tolist(), reverse=True)
                 d_img = np.full_like(img, sorted_palette[0], dtype=int)
                 n = dither_m.shape[0]
@@ -90,7 +88,5 @@ if image:
             img = cv2.imdecode(np.frombuffer(image.read(), np.uint8), cv2.IMREAD_COLOR)
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-            print(img.shape)
-            print(dither_n, n_colors, downscale, density)
             img = generate_pixel_art(img, dither_matrix(dither_n), n_colors, downscale, density)
             st.image(img, use_column_width=True, output_format="PNG")
