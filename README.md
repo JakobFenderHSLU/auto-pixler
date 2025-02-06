@@ -1,10 +1,8 @@
-# Color Quantization & Dithering Demo
-
-This repository contains source code for a Computer Vision & AI homework assignment at HSLU, capped at 20 hours. The project explores color quantization and dithering techniques.
-
 # Color Quantization & Dithering Experiment  
 
 This repository contains source code for a **Computer Vision & AI** homework assignment at **HSLU**. The project explores **color quantization** and **dithering** techniques.  
+
+![Picture1](https://github.com/user-attachments/assets/18711b11-e0e1-4a74-8ae1-23ad81480cc2)
 
 ## 🚀 Streamlit Demo  
 Check out the interactive demo:  
@@ -20,6 +18,7 @@ Color quantization reduces the number of colors in an image while trying to keep
 [further informations](https://en.wikipedia.org/wiki/Color_quantization)
 
 ### 🖼️ Dithering
+
 
 Dithering is a technique used to fake missing colors by blending pixels of different colors. It creates the illusion of more colors by placing different-colored pixels next to each other. This is common in old video games and black-and-white printing.
 
